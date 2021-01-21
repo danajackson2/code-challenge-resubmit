@@ -8,27 +8,32 @@
       "comments": [
         {
           "imageId": 1,
-          "content": "asdf",
+          "content": "Comment",
           "id": 1
+        },
+        {
+          "imageId": 1,
+          "content": "Such a cutie pootie",
+          "id": 2
         }
       ]
     }
   ],
   "comments": [
     {
-      "id": 1,
       "imageId": 1,
-      "content": "What a cute dog!"
+      "content": "Cute dorge",
+      "id": 1
     },
     {
-      "id": 2,
       "imageId": 1,
-      "content": "He's got a nose for bugs!"
+      "content": "Such fluff, wow",
+      "id": 2
     },
     {
-      "id": 3,
       "imageId": 1,
-      "content": "Woof!"
+      "content": "Love to comment!",
+      "id": 3
     }
   ]
 }

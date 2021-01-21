@@ -4,19 +4,19 @@ function getDog(id){
     .then(dog => renderDog(dog))
 }
 
-function addLike(dog){
+function editLikes(dog, increment){
     fetch(`http://localhost:3000/images/${dog.id}`, {
         method: 'PATCH',
         headers: {'content-type':'application/json'},
         body: JSON.stringify({
             title: dog.title,
-            likes: dog.likes + 1,
+            likes: dog.likes + increment,
             image: dog.image,
             comments: dog.comments
         })
     })
     .then(res => res.json())
-    .then(dog => renderDog(dog))
+    .then(dog => getDog(dog.id))
 }
 
 function addComment(e){
@@ -37,12 +37,21 @@ function addComment(e){
     })
 }
 
+function deleteComment(comment){
+    fetch(`http://localhost:3000/comments/${comment.id}`,{
+        method: 'DELETE',
+        headers: {'content-type':'application/json'},
+    })
+    .then(() => getDog(comment.imageId))
+}
+
 function renderDog(dog){
     let dogDiv = document.querySelector('div.image-card')
     dogDiv.querySelector('h2.title').textContent = dog.title
     dogDiv.querySelector('img.image').src = dog.image
     dogDiv.querySelector('span.likes').textContent = `${dog.likes} likes`
-    dogDiv.querySelector('button.like-button').addEventListener('click', () => addLike(dog))
+    dogDiv.querySelector('button.like-button').addEventListener('click', () => editLikes(dog, 1))
+    dogDiv.querySelector('button.unlike-button').addEventListener('click', () => editLikes(dog, -1))
     dogDiv.querySelector('form.comment-form').id = `form-${dog.id}`
     dogDiv.querySelector('.comment-form').addEventListener('submit', addComment)
     document.querySelector('ul.comments').innerHTML = ""
@@ -51,8 +60,13 @@ function renderDog(dog){
     } else {
         dogDiv.querySelector('form input').placeholder = "Add a comment..."
         dog.comments.forEach(comment => {
+            let button = document.createElement('button')
+            button.addEventListener('click', () => deleteComment(comment))
+            button.textContent = "delete"
+            // button.style = "margin-right:auto" Button on right of card??
             let li = document.createElement('li')
             li.textContent = comment.content
+            li.appendChild(button)
             dogDiv.querySelector('ul.comments').appendChild(li)
         })
     }

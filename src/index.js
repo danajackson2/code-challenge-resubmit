@@ -1,7 +1,14 @@
+let currentDog = {} 
+
 function getDog(id){
     fetch(`http://localhost:3000/images/${id}`)
     .then(res => res.json())
-    .then(dog => renderDog(dog))
+    .then(dog => {
+        renderDog(dog)
+        document.querySelector('.like-button').addEventListener('click', () => editLikes(currentDog, 1))
+        document.querySelector('.unlike-button').addEventListener('click', () => editLikes(currentDog, -1))
+        document.querySelector('.comment-form').addEventListener('submit', addComment)
+    })
 }
 
 function editLikes(dog, increment){
@@ -16,7 +23,7 @@ function editLikes(dog, increment){
         })
     })
     .then(res => res.json())
-    .then(dog => getDog(dog.id))
+    .then(dog => {renderDog(dog)})
 }
 
 function addComment(e){
@@ -31,9 +38,9 @@ function addComment(e){
         })
     })
     .then(res => res.json())
-    .then(() => {
+    .then((comment) => {
         e.target.querySelector('input').value = ""
-        getDog(dogId)
+        renderComment(comment)
     })
 }
 
@@ -42,34 +49,37 @@ function deleteComment(comment){
         method: 'DELETE',
         headers: {'content-type':'application/json'},
     })
-    .then(() => getDog(comment.imageId))
 }
 
 function renderDog(dog){
+    currentDog = dog
     let dogDiv = document.querySelector('div.image-card')
     dogDiv.querySelector('h2.title').textContent = dog.title
     dogDiv.querySelector('img.image').src = dog.image
     dogDiv.querySelector('span.likes').textContent = `${dog.likes} likes`
-    dogDiv.querySelector('button.like-button').addEventListener('click', () => editLikes(dog, 1))
-    dogDiv.querySelector('button.unlike-button').addEventListener('click', () => editLikes(dog, -1))
     dogDiv.querySelector('form.comment-form').id = `form-${dog.id}`
-    dogDiv.querySelector('.comment-form').addEventListener('submit', addComment)
     document.querySelector('ul.comments').innerHTML = ""
     if (dog.comments.length === 0){
         dogDiv.querySelector('form input').placeholder = "Be the first to comment!"
     } else {
         dogDiv.querySelector('form input').placeholder = "Add a comment..."
-        dog.comments.forEach(comment => {
-            let button = document.createElement('button')
-            button.addEventListener('click', () => deleteComment(comment))
-            button.textContent = "delete"
-            // button.style = "margin-right:auto" Button on right of card??
-            let li = document.createElement('li')
-            li.textContent = comment.content
-            li.appendChild(button)
-            dogDiv.querySelector('ul.comments').appendChild(li)
-        })
+        dog.comments.forEach(comment => {renderComment(comment)})
     }
+}
+
+function renderComment(comment){
+    let dogDiv = document.querySelector('div.image-card')
+    let button = document.createElement('button')
+    button.textContent = "delete"
+    // button.style = "position:absolute; right:0px" Button on right of card??
+    let li = document.createElement('li')
+    li.textContent = comment.content
+    li.appendChild(button)
+    dogDiv.querySelector('ul.comments').appendChild(li)
+    button.addEventListener('click', () => {
+        li.remove()
+        deleteComment(comment)
+    })
 }
 
 getDog(1)

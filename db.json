@@ -2,19 +2,24 @@
   "images": [
     {
       "id": 1,
-      "title": "Woofing those bugs away",
-      "likes": 4,
-      "image": "./assets/coder-dog.png",
+      "title": "I will reject your treats, human.",
+      "likes": 16,
+      "image": "./assets/willow-dog.jpeg",
       "comments": [
         {
           "imageId": 1,
-          "content": "Comment",
-          "id": 1
+          "content": "asdfsdf",
+          "id": 9
         },
         {
           "imageId": 1,
-          "content": "Such a cutie pootie",
-          "id": 2
+          "content": "asdfasdfs",
+          "id": 10
+        },
+        {
+          "imageId": 1,
+          "content": "sadfsdf",
+          "id": 11
         }
       ]
     }
@@ -22,18 +27,18 @@
   "comments": [
     {
       "imageId": 1,
-      "content": "Cute dorge",
-      "id": 1
+      "content": "asdfsdf",
+      "id": 9
     },
     {
       "imageId": 1,
-      "content": "Such fluff, wow",
-      "id": 2
+      "content": "asdfasdfs",
+      "id": 10
     },
     {
       "imageId": 1,
-      "content": "Love to comment!",
-      "id": 3
+      "content": "sadfsdf",
+      "id": 11
     }
   ]
 }

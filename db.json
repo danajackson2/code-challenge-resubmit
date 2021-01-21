@@ -3,23 +3,13 @@
     {
       "id": 1,
       "title": "I will reject your treats, human.",
-      "likes": 10,
+      "likes": 12,
       "image": "./assets/willow-dog.jpeg",
       "comments": [
         {
           "imageId": 1,
-          "content": "asdf",
-          "id": 5
-        },
-        {
-          "imageId": 1,
-          "content": "asdf",
-          "id": 6
-        },
-        {
-          "imageId": 1,
           "content": "asdfasdf",
-          "id": 7
+          "id": 1
         }
       ]
     }
@@ -27,18 +17,8 @@
   "comments": [
     {
       "imageId": 1,
-      "content": "asdf",
-      "id": 6
-    },
-    {
-      "imageId": 1,
       "content": "asdfasdf",
-      "id": 7
-    },
-    {
-      "imageId": 1,
-      "content": "asdfasdf",
-      "id": 8
+      "id": 1
     }
   ]
 }

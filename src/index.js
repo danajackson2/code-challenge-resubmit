@@ -42,6 +42,12 @@ function addComment(e){
         e.target.querySelector('input').value = ""
         renderComment(comment)
     })
+    .then(() => {
+        fetch(`http://localhost:3000/images/1`)
+            .then(res => res.json())
+            .then(dog => {currentDog = dog})
+    })
+    document.querySelector('form input').placeholder = "Add a comment..."
 }
 
 function deleteComment(comment){
@@ -49,6 +55,12 @@ function deleteComment(comment){
         method: 'DELETE',
         headers: {'content-type':'application/json'},
     })
+    .then(() => {
+        fetch(`http://localhost:3000/images/1`)
+            .then(res => res.json())
+            .then(dog => {currentDog = dog})
+    })
+    document.querySelector('.comments').firstChild ? document.querySelector('form input').placeholder = "Add a comment..." : document.querySelector('form input').placeholder = "Be the first to comment!"
 }
 
 function renderDog(dog){

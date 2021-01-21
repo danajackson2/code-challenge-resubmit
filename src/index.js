@@ -23,7 +23,7 @@ function editLikes(dog, increment){
         })
     })
     .then(res => res.json())
-    .then(dog => {renderDog(dog)})
+    .then(dog => renderDog(dog))
 }
 
 function addComment(e){
@@ -63,7 +63,7 @@ function renderDog(dog){
         dogDiv.querySelector('form input').placeholder = "Be the first to comment!"
     } else {
         dogDiv.querySelector('form input').placeholder = "Add a comment..."
-        dog.comments.forEach(comment => {renderComment(comment)})
+        dog.comments.forEach((comment) => {renderComment(comment)})
     }
 }
 

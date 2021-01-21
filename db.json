@@ -3,8 +3,15 @@
     {
       "id": 1,
       "title": "Woofing those bugs away",
-      "likes": 0,
-      "image": "./assets/coder-dog.png"
+      "likes": 4,
+      "image": "./assets/coder-dog.png",
+      "comments": [
+        {
+          "imageId": 1,
+          "content": "asdf",
+          "id": 1
+        }
+      ]
     }
   ],
   "comments": [
